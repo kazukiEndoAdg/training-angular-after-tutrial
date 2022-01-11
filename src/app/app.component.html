@@ -1,7 +1,2 @@
-<ul>
-  <li *ngFor="let user of users">
-    <app-user-list-item [user]="user"></app-user-list-item>
-  </li>
-</ul>
-
+<app-user-list *ngIf="users$ | async as users" [users]="users"></app-user-list>
 <router-outlet></router-outlet>

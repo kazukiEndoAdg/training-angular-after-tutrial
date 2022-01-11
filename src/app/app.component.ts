@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { User } from './user';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +9,12 @@ import { User } from './user';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  users: User[] = [];
+  //TODO research what's async pipe.
+  //TODO It's Observable<User[]>
+  users$ = this.userService.users$;
 
-  constructor(private http: HttpClient) {}
+  constructor(private userService: UserService) {}
   ngOnInit() {
-    this.http
-      .get<{ data: User[] }>('https://reqres.in/api/users')
-      .subscribe((resp) => {
-        this.users = resp.data;
-      });
+    this.userService.fetchUsers();
   }
 }
