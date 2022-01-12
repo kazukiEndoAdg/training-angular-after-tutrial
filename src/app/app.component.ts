@@ -1,6 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { User } from './user';
 import { UserService } from './user.service';
 
 @Component({
@@ -10,7 +8,7 @@ import { UserService } from './user.service';
 })
 export class AppComponent {
   //TODO research what's async pipe.
-  //TODO It's Observable<User[]>
+  //It's Observable<User[]>
   users$ = this.userService.users$;
 
   constructor(private userService: UserService) {}
