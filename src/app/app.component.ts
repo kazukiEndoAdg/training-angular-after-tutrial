@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { UserService } from './user.service';
+import { UserListFilter } from './store/userList/state';
+import { UserListUsecase } from './user-list.usecase';
 
 @Component({
   selector: 'app-root',
@@ -7,12 +8,16 @@ import { UserService } from './user.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  //TODO research what's async pipe.
-  //It's Observable<User[]>
-  users$ = this.userService.users$;
+  users$ = this.userList.users$;
+  userListFilter$ = this.userList.filter$;
 
-  constructor(private userService: UserService) {}
+  constructor(private userList: UserListUsecase) {}
+
   ngOnInit() {
-    this.userService.fetchUsers();
+    this.userList.fetchUsers();
+  }
+
+  setUserListFilter(value: UserListFilter) {
+    this.userList.setNameFilter(value.nameFilter);
   }
 }
