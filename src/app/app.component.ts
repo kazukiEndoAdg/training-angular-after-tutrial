@@ -3,7 +3,7 @@ import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
-  template: `<app-explicit-subscribe></app-explicit-subscribe>
+  template: `<app-async-pipe></app-async-pipe>
     <button (click)="updateValue()">Update Value</button>`,
 })
 export class AppComponent {

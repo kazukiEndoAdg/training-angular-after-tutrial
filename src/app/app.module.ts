@@ -6,9 +6,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AsyncPipeComponent } from './async-pipe/async-pipe.component';
 
 @NgModule({
-  declarations: [AppComponent, ExplicitSubscribeComponent],
+  declarations: [AppComponent, ExplicitSubscribeComponent, AsyncPipeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
