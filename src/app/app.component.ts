@@ -1,23 +1,16 @@
 import { Component } from '@angular/core';
-import { UserListFilter } from './store/userList/state';
-import { UserListUsecase } from './user-list.usecase';
+import { DataService } from './data.service';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  template: `<app-explicit-subscribe></app-explicit-subscribe>
+    <button (click)="updateValue()">Update Value</button>`,
 })
 export class AppComponent {
-  users$ = this.userList.users$;
-  userListFilter$ = this.userList.filter$;
+  constructor(private dataService: DataService) {}
 
-  constructor(private userList: UserListUsecase) {}
-
-  ngOnInit() {
-    this.userList.fetchUsers();
-  }
-
-  setUserListFilter(value: UserListFilter) {
-    this.userList.setNameFilter(value.nameFilter);
+  updateValue() {
+    const value = new Date().toISOString();
+    this.dataService.setValue(value);
   }
 }
