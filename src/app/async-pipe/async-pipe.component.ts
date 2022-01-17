@@ -15,18 +15,34 @@ import { Component } from '@angular/core';
     >
     <br />
     <br />
-    <div>{{ value$ | async }}</div>
-    <br />
-    【重要】
     <b
-      >Asyncパイプは、コンポーネントの初期化時にフィールドとして存在する、無限なObservableにのみ使われるべきです。</b
-    ><br />
-    つまりユーザーインタラクションなどによって後から発生するHTTPリクエストのような<br />
-    有限のObservableは、Asyncパイプを使うのに適していません。<br />
-    <b
-      >そのようなケースの場合は明示的にsubscriptionを開始し、onDestroy$をtakeUntilしたような方法を採る必要があります。</b
-    >
-    <br />
+      >↓OKパターン。(ngIf asとasyncを併用)<br />
+      asyncパイプを適用したObservableを複数、同期的に記述することができる。<br />
+      <ng-container *ngIf="value$ | async as state">
+        <div>{{ state }}</div>
+        <div>{{ state }}</div>
+      </ng-container>
+
+      <br />
+      <br />
+      <b
+        >↓NGパターン。
+        複数の変数間で結果が常にイコール(同期的)とならないため。</b
+      >
+      <div>{{ value$ | async }}</div>
+      <div>{{ value$ | async }}</div>
+      <br />
+      【重要】
+      <b
+        >Asyncパイプは、コンポーネントの初期化時にフィールドとして存在する、無限なObservableにのみ使われるべきです。</b
+      ><br />
+      つまりユーザーインタラクションなどによって後から発生するHTTPリクエストのような<br />
+      有限のObservableは、Asyncパイプを使うのに適していません。<br />
+      <b
+        >そのようなケースの場合は明示的にsubscriptionを開始し、onDestroy$をtakeUntilしたような方法を採る必要があります。</b
+      >
+      <br />
+    </b>
   `,
 })
 export class AsyncPipeComponent {
