@@ -18,10 +18,11 @@ import { Component } from '@angular/core';
     <b
       >↓OKパターン。(ngIf asとasyncを併用)<br />
       asyncパイプを適用したObservableを複数、同期的に記述することができる。<br />
-      <ng-container *ngIf="value$ | async as state">
+      <ng-container *ngIf="value$ | async as state; else nullState">
         <div>{{ state }}</div>
         <div>{{ state }}</div>
       </ng-container>
+      <ng-template #nullState> State is null </ng-template>
 
       <br />
       <br />
